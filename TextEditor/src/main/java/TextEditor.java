@@ -7,6 +7,8 @@ public class TextEditor extends JFrame implements ActionListener {
 
     //Declaration of an instance variable
     JTextArea textArea;
+    JScrollPane scrollPane;
+    JSpinner fontSizeSpinner;
 
     //Constructor
     TextEditor(){
@@ -17,9 +19,15 @@ public class TextEditor extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
 
         textArea = new JTextArea();
-        textArea.setPreferredSize(new Dimension(450, 450));
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setFont(new Font("Arial", Font.PLAIN,50));
 
-        this.add(textArea);
+        scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(450, 450));
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        this.add(scrollPane);
         this.setVisible(true);
 
     }
