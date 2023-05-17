@@ -7,11 +7,12 @@ import java.awt.event.ActionListener;
 
 public class TextEditor extends JFrame implements ActionListener {
 
-    //Declaration of an instance variable
+    //Declaration of our instance variables
     JTextArea textArea;
     JScrollPane scrollPane;
     JLabel fontLabel;
     JSpinner fontSizeSpinner;
+    JButton fontColorButton;
 
     //Constructor
     TextEditor(){
@@ -21,15 +22,18 @@ public class TextEditor extends JFrame implements ActionListener {
         this.setLayout(new FlowLayout());
         this.setLocationRelativeTo(null);
 
+        // Text area
         textArea = new JTextArea();
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         textArea.setFont(new Font("Arial", Font.PLAIN,50));
 
+        //Gives user ability to increase & decrease font size
         scrollPane = new JScrollPane(textArea);
         scrollPane.setPreferredSize(new Dimension(450, 450));
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
+        //Addition of the "Font" label added next to scroll pane.
         fontLabel = new JLabel("Font: ");
 
         fontSizeSpinner = new JSpinner();
@@ -42,8 +46,13 @@ public class TextEditor extends JFrame implements ActionListener {
                 textArea.setFont(new Font(textArea.getFont().getFamily(), Font.PLAIN, (int) fontSizeSpinner.getValue()));
             }
         });
+
+        fontColorButton = new JButton("Color");
+        fontColorButton.addActionListener(this);
+
         this.add(fontLabel);
         this.add(fontSizeSpinner);
+        this.add(fontColorButton);
         this.add(scrollPane);
         this.setVisible(true);
     }
