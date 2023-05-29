@@ -30,25 +30,45 @@ public class Hangman {
 
         List<Character> playerGuesses = new ArrayList<>();
 
-        printWordState(word, playerGuesses);
+        while(true) {
+            printWordState(word, playerGuesses);
+            getPlayerGuess(keyboard, word, playerGuesses);
 
+            if(printWordState(word,playerGuesses)) {
+                System.out.println("You win!");
+                break;
+            }
+
+            System.out.println("Please enter your guess for the word:");
+            if(keyboard.nextLine().equals(word)) {
+                System.out.println("You win!");
+                break;
+            }
+            else {
+                System.out.println("Nope! Try again");
+            }
+        }
+    }
+
+    private static void getPlayerGuess(Scanner keyboard, String word, List<Character> playerGuesses) {
         System.out.println("Please enter a letter:");
         String letterGuess = keyboard.nextLine();
         playerGuesses.add(letterGuess.charAt(0));
-
-        printWordState(word, playerGuesses);
-
     }
 
-    private static void printWordState(String word, List<Character> playerGuesses) {
+    private static boolean printWordState(String word, List<Character> playerGuesses) {
+        int correctCount = 0;
         for (int i = 0; i < word.length(); i++) {
             if (playerGuesses.contains(word.charAt(i))) {
                 System.out.print(word.charAt(i));
+                correctCount++;
             }
             else {
                 System.out.print("-");
             }
         }
         System.out.println();
+
+        return (word.length() == correctCount);
     }
 }
