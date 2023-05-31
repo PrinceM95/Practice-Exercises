@@ -17,18 +17,21 @@ public class Hangman {
 
         List<String> words = new ArrayList<>();
 
+        //checks for words from scanner object and adds words until no more left to add
         while (scanner.hasNext()) {
             words.add(scanner.nextLine());
         }
 
+        //an object designed to retrieve words in a randomized fashion
         Random rand = new Random();
 
+        //these two lines are designed to select a random word from 'words' list and then print out to console
         String word = words.get(rand.nextInt(words.size()));
-
         System.out.println(word);
 
-
+        //An array list object designed to keep track of the letters player guesses
         List<Character> playerGuesses = new ArrayList<>();
+
 
         while(true) {
             printWordState(word, playerGuesses);
@@ -50,11 +53,14 @@ public class Hangman {
         }
     }
 
+    //stored method designed to continuously ask user to guess a letter. we make sure it takes the first character
+    // they type as opposed to multiple characters.
     private static void getPlayerGuess(Scanner keyboard, String word, List<Character> playerGuesses) {
         System.out.println("Please enter a letter:");
         String letterGuess = keyboard.nextLine();
         playerGuesses.add(letterGuess.charAt(0));
     }
+
 
     private static boolean printWordState(String word, List<Character> playerGuesses) {
         int correctCount = 0;
